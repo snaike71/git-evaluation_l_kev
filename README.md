@@ -26,6 +26,11 @@ cd git-evaluation_l_kev
 
 ### Rendre le script exécutable
 
+```
+chmod +x minitrice
+chmod +x generator
+```
+
 ## Exécution
 
 ### Utilisation Interactive
@@ -57,18 +62,18 @@ cat good-expression.txt | ./minitrice
 ### Générateur d'Expressions
 
 ```
-python generator.py <number_of_expressions>
+./generator <number_of_expressions>
 ```
 Exemple :
 
 ```
-python generator.py 5
+./generator 5
 ```
 
 ### Utilisation du Générateur avec minitrice
 
 ```
-python generator.py 5 | ./minitrice
+./generator 5 | ./minitrice
 ```
 
 ## Réponses aux Questions
