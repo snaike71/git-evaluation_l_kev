@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import sys
-import select
+import os
 
 def add(a, b):
     return a + b
@@ -48,10 +48,25 @@ def read_from_stdin():
             except Exception as e:
                 print(f"Erreur : {e}")
 
+def read_from_test_files():
+    test_dir = "test"
+    result_dir = "results"
+    for filename in os.listdir(test_dir):
+        if filename.endswith(".txt"):
+            filepath = os.path.join(test_dir, filename)
+            with open(filepath, 'r') as file:
+                content = file.read().strip()
+                result = calculate(content)
+                result_filepath = os.path.join(result_dir, filename.replace(".txt", "-result.txt"))
+                with open(result_filepath, 'w') as result_file:
+                    result_file.write(str(result))
+                    result_file.write('\n')
+
 def main():
-    # Detect if there is data on stdin
     if not sys.stdin.isatty():
         read_from_stdin()
+    elif len(sys.argv) > 1 and sys.argv[1] == '--test':
+        read_from_test_files()
     else:
         interactive_mode()
 
