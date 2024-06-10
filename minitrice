@@ -19,7 +19,8 @@ def divide(a, b):
 
 def calculate(expression):
     try:
-        return eval(expression)
+        compiled_expr = compile(expression, "<string>", "eval")
+        return eval(compiled_expr)
     except SyntaxError:
         return "Erreur de syntaxe"
     except ZeroDivisionError:
@@ -51,16 +52,20 @@ def read_from_stdin():
 def read_from_test_files():
     test_dir = "test"
     result_dir = "results"
+    if not os.path.exists(result_dir):
+        os.makedirs(result_dir)
     for filename in os.listdir(test_dir):
         if filename.endswith(".txt"):
             filepath = os.path.join(test_dir, filename)
             with open(filepath, 'r') as file:
-                content = file.read().strip()
-                result = calculate(content)
+                content = file.readlines()
                 result_filepath = os.path.join(result_dir, filename.replace(".txt", "-result.txt"))
                 with open(result_filepath, 'w') as result_file:
-                    result_file.write(str(result))
-                    result_file.write('\n')
+                    for line in content:
+                        line = line.strip()
+                        if line:  # Ignore empty lines
+                            result = calculate(line)
+                            result_file.write(f"{result}\n")
 
 def main():
     if not sys.stdin.isatty():
