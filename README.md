@@ -20,8 +20,8 @@ Ce projet consiste à créer un programme capable de réaliser les quatre opéra
 
 ### Cloner le dépôt
 ```
-git clone https://github.com/nom-utilisateur/git-evaluation_l_kev.git
-cd git-evaluation_l_kev
+git clone https://github.com/snaike71/git-evaluation_l_kevin.git
+cd git-evaluation_l_kevin
 ```
 
 ### Rendre le script exécutable
